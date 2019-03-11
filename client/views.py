@@ -7,6 +7,8 @@ from django.urls import reverse
 from .util import get_sum_money, get_order_number
 from .models import *
 from .serializers import OrderItemSerializer
+from django.conf import settings
+
 # Create your views here.
 def home(request):
     tops = Wheel.objects.all()

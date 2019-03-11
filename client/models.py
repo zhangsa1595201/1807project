@@ -236,3 +236,17 @@ class OrderItem(models.Model):
         max_length=255,
         null=True
     )
+
+class ErrorLog(models.Model):
+    msg = models.CharField(
+        max_length=255,
+        verbose_name="错误信息"
+    )
+    api_path = models.CharField(
+        max_length=255,
+        verbose_name="请求路径"
+    )
+    date = models.DateField(
+        auto_now_add=True,
+        verbose_name="错误发送时间"
+    )

@@ -25,7 +25,7 @@ SECRET_KEY = 'fz90)(gloj@&@r^zbazndi#22o6_v8u!r_)!x3_93ta#@dw(^8'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'client',
     'rest_framework',
+    "djcelery"
 ]
 
 MIDDLEWARE = [
@@ -130,8 +131,13 @@ STATIC_URL = '/static/'
 
 # 静态文件存储位置
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR,"static")
+    os.path.join(BASE_DIR,"static"),
 ]
+# STATIC_ROOT  = [
+#     r'/home/sa/1807teach/axf',
+# ]
+
+
 
 # 用户上传文件的目录
 MEDIA_ROOT = os.path.join(BASE_DIR,"static/uploads")
@@ -161,3 +167,16 @@ CACHES = {
         }
     }
 }
+
+# 开发者信息
+ADMINS = (("sa", "2269579003@qq.com"),)
+
+# celery配置
+import djcelery
+djcelery.setup_loader()
+BROKER_URL='redis://localhost:6379/1'
+CELERY_CONCURRENCY=2 #（设置worker的并发数量）
+CELERY_RESULT_BACKEND = 'redis://localhost:6379/2'
+CELERY_TASK_SERIALIZER = 'json'              # 任务序列化和反序列化使用json
+CELERY_RESULT_SERIALIZER = 'json'
+
